@@ -228,6 +228,7 @@ function addItemToCart(event){
                 toCart.innerText = `$${cartBank}.00 CART`
                 item[0].totalPrice = Number(item[0].price) * item[0].counter
                 console.log(itemsInCart)
+                console.log('labas')
             }
         }else {
             if(item[0].counter < item[0].stock){
