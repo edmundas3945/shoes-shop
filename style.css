@@ -307,3 +307,6 @@ main {
     margin-top: 0;
     cursor: pointer;
 }
+.close:hover {
+    color: red;
+}

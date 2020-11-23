@@ -365,6 +365,6 @@ function closeCard(event){
     console.log(event)
     itemsInCart = itemsInCart.filter(x => x.id !== event.target.id)
     cartBank -= event.target.price
-
+    console.log('this code is not finished')
     showItemInCart()
 }
