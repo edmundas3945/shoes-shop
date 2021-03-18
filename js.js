@@ -227,8 +227,8 @@ function addItemToCart(event){
                 cartBank += Number(item[0].price)
                 toCart.innerText = `$${cartBank}.00 CART`
                 item[0].totalPrice = Number(item[0].price) * item[0].counter
-                console.log(itemsInCart)
-                console.log('labas')
+                // console.log(itemsInCart)
+                // console.log('labas')
             }
         }else {
             if(item[0].counter < item[0].stock){
@@ -363,8 +363,12 @@ function plusOne(event){
 
 function closeCard(event){
     console.log(event)
-    itemsInCart = itemsInCart.filter(x => x.id !== event.target.id)
+    // itemsInCart = itemsInCart.filter(x => x.id !== event.target.id)
     cartBank -= event.target.price
     console.log('this code is not finished')
     showItemInCart()
+}
+
+function removeRedBoarder() {
+    selectSize.style.border = 'none'
 }
