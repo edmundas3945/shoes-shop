@@ -1,4 +1,4 @@
-const picassoTxt = document.getElementById('picassoTxt')
+const titleOfPage = document.getElementById('picassoTxt')
 const main = document.getElementById('main')
 const shop = document.getElementById('shop')
 const itemChosen = document.getElementById('itemChosen')
@@ -20,6 +20,9 @@ const btnBox = document.querySelector('.btnBox')
 const cartBox = document.getElementById('cartBox')
 
 let cartBank = 0
+
+toCart.innerText = `$${cartBank}.00 CART`
+
 let products = [
     {
         title: "OZWEEGO SHOES",
@@ -100,10 +103,28 @@ shopBtn.addEventListener('click', backToShop)
 smallerIcons.addEventListener('click', changePhoto)
 removeBox.addEventListener('click', removePanel)
 toCart.addEventListener('click', goToCart)
-picassoTxt.addEventListener('click', showMain)
+titleOfPage.addEventListener('click', showMain)
 fromCartToShop.addEventListener('click', backToShopCart)
 
-toCart.innerText = `$${cartBank}.00 CART`
+
+
+function updateCartBank(cart) {
+    
+    if (cart.length === 0) {
+        cartBank = 0
+        toCart.innerText = `$${cartBank}.00 CART`
+    }else {
+        cartBank = 0
+        cart.map(item => {
+        cartBank += item.totalPrice
+        toCart.innerText = `$${cartBank}.00 CART`
+        
+    })
+    }
+    
+}
+
+
 
 products.map(item => {
 
@@ -224,37 +245,24 @@ function addItemToCart(event){
             if(item[0].stock > 1){
                 itemsInCart.push(item[0])
                 item[0].counter = 1
-                cartBank += Number(item[0].price)
-                toCart.innerText = `$${cartBank}.00 CART`
                 item[0].totalPrice = Number(item[0].price) * item[0].counter
+                
                 // console.log(itemsInCart)
                 // console.log('labas')
             }
         }else {
             if(item[0].counter < item[0].stock){
 
-                cartBank += Number(item[0].price)
-                toCart.innerText = `$${cartBank}.00 CART`
+                
                 item[0].counter ++
                 item[0].totalPrice = Number(item[0].price) * item[0].counter
+                
             }
         }
-        // products.map(item => {
-        //     if(event.target.id === item.id && item.stock > 0){
-        //         console.log(item.id)
-        //         console.log(event.target.id)
-        //
-        //         cartBank += Number(item.price)
-        //         toCart.innerText = `$${cartBank}.00 CART`
-        //         item.stock--
-        //         // console.log(item.stock)
-        //
-        //         itemsInCart.filter(x => x.id === event.target.id)
-        //         console.log(itemsInCart)
-        //     }
-        // })
+        
     }
     showItemInCart()
+    updateCartBank(itemsInCart)
 
 }
 
@@ -329,15 +337,17 @@ function minusOne(event){
     // console.log(event)
     products.map((x,index) => {
         if(x.id === event.target.id){
+            if (x.counter < 2) {
+                closeCard(event)
+            }
             if(x.counter >= 2){
                 event.path[2].children[1].innerText = x.counter
                 event.path[3].children[4].innerText = x.totalPrice
                 products[index].counter--
                 x.totalPrice -= Number(x.price)
-                cartBank -= Number(x.price)
-                // console.log(products[index].var)
-                toCart.innerText = `$${cartBank}.00 CART`
+                updateCartBank(itemsInCart)
             }
+            
         }
     })
     showItemInCart()
@@ -352,9 +362,7 @@ function plusOne(event){
                 event.path[3].children[4].innerText = x.totalPrice
                 products[index].counter++
                 x.totalPrice += Number(x.price)
-                cartBank += Number(x.price)
-                // console.log(products[index].var)
-                toCart.innerText = `$${cartBank}.00 CART`
+                updateCartBank(itemsInCart)
             }
         }
     })
@@ -362,11 +370,11 @@ function plusOne(event){
 }
 
 function closeCard(event){
-    console.log(event)
-    // itemsInCart = itemsInCart.filter(x => x.id !== event.target.id)
-    cartBank -= event.target.price
-    console.log('this code is not finished')
+    // console.log(event)
+    itemsInCart = itemsInCart.filter(x => x.id !== event.target.id)
+    // console.log('this code is not finished')
     showItemInCart()
+    updateCartBank(itemsInCart)
 }
 
 function removeRedBoarder() {
