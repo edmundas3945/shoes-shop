@@ -46,13 +46,13 @@
     <main id="main">
       <div class="shopSorting">
         <span>Sort by</span>
-        <select id="sort">
+        <select onchange="sortingArr(event)" style="background-color: #eceff1;" id="sort">
           <option value="0">Product Name</option>
           <option value="1">Highest Price</option>
           <option value="2">Lowest Price</option>
         </select>
         <span>show me</span>
-        <select id="show">
+        <select style="background-color: #eceff1;" id="show">
           <option value="0">All Products</option>
           <option value="1">Tennis</option>
           <option value="2">Running</option>
