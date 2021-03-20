@@ -36,6 +36,7 @@ let products = [
     stock: "2",
     price: "80",
     id: "1",
+    type: "Tennis",
   },
   {
     title: "ZX 2K BOOST SHOES",
@@ -48,6 +49,7 @@ let products = [
     stock: "8",
     price: "150",
     id: "2",
+    type: "Running",
   },
   {
     title: "X90004D SHOES",
@@ -60,6 +62,7 @@ let products = [
     stock: "5",
     price: "160",
     id: "3",
+    type: "Training",
   },
   {
     title: "ULTRABOOST 20 SHOES",
@@ -72,6 +75,7 @@ let products = [
     stock: "12",
     price: "180",
     id: "4",
+    type: "Training",
   },
   {
     title: "OZWEEGO SHOES",
@@ -84,6 +88,7 @@ let products = [
     stock: "25",
     price: "110",
     id: "5",
+    type: "Tennis",
   },
   {
     title: "ZX 2K BOOST SHOES",
@@ -96,6 +101,7 @@ let products = [
     stock: "5",
     price: "150",
     id: "6",
+    type: "Running",
   },
 ];
 let itemsInCart = [];
@@ -160,28 +166,51 @@ function generateProducts(arr) {
 }
 
 function sortingArr(e) {
-  console.log("helou");
   if (e.target.value == 0) {
     products.sort(function (a, b) {
       return a.title.toLocaleLowerCase() < b.title.toLocaleLowerCase();
     });
-    shop.innerHTML = ''
-    generateProducts(products)
+    shop.innerHTML = "";
+    generateProducts(products);
   }
   if (e.target.value == 1) {
     products.sort(function (a, b) {
       return b.price - a.price;
     });
-    shop.innerHTML = ''
-    generateProducts(products)
-
+    shop.innerHTML = "";
+    generateProducts(products);
   }
   if (e.target.value == 2) {
     products.sort(function (a, b) {
       return a.price - b.price;
     });
-    shop.innerHTML = ''
-    generateProducts(products)
+    shop.innerHTML = "";
+    generateProducts(products);
+  }
+}
+
+function filterArr(e) {
+    console.log(e.target.value);
+  let filteredArray = [];
+  if (e.target.value == 0) {
+    null;
+    shop.innerHTML = "";
+    generateProducts(products);
+  }
+  if (e.target.value == 1) {
+    filteredArr = products.filter(value => value.type == "Tennis");
+    shop.innerHTML = "";
+    generateProducts(filteredArr);
+  }
+  if (e.target.value == 2) {
+    filteredArr = products.filter(value => value.type == "Running");
+    shop.innerHTML = "";
+    generateProducts(filteredArr);
+  }
+  if (e.target.value == 3) {
+    filteredArr = products.filter(value => value.type == "Training");
+    shop.innerHTML = "";
+    generateProducts(filteredArr);
   }
 }
 
